@@ -6,10 +6,8 @@ import os
 app = Flask(__name__)
 
 # Load the trained spam classification model
-MODEL_PATH = os.path.join(
-    os.path.dirname(__file__),
-    "spam_model.joblib"
-)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "spam_model.joblib")
 
 model = joblib.load(MODEL_PATH)
 
@@ -29,6 +27,8 @@ def home():
                 prediction = "Spam Email"
             else:
                 prediction = "Not Spam (Ham)"
+        else:
+            prediction = "Please enter an email message."
 
     return render_template(
         "index.html",
