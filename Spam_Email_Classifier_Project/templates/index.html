@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spam Email Classifier</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;font-family:Arial,sans-serif;color:#20243a;background:linear-gradient(135deg,#eef2ff,#f8fafc)}
+main{width:min(100%,700px);background:white;padding:clamp(24px,5vw,42px);border-radius:22px;box-shadow:0 18px 60px #20243a18}
+.eyebrow{color:#5c52d5;font-size:12px;font-weight:800;letter-spacing:1.7px}h1{font-size:clamp(28px,5vw,40px);margin:12px 0}p{color:#626b80;line-height:1.65}
+label{display:block;margin:24px 0 10px;font-weight:bold}textarea{width:100%;min-height:180px;resize:vertical;padding:16px;border:1px solid #d9deeb;border-radius:12px;font:inherit;line-height:1.5}
+button{width:100%;margin-top:14px;padding:15px;border:0;border-radius:12px;background:#5c52d5;color:white;font-size:16px;font-weight:bold;cursor:pointer}
+.result{margin-top:22px;padding:18px;border-radius:12px;background:#f3f4ff}.spam,.error{color:#b42318}.ham{color:#147d49}.note{margin-top:24px;font-size:12px}
+</style></head>
+<body><main>
+<div class="eyebrow">AI • MACHINE LEARNING • NLP</div><h1>Spam Email Classifier</h1>
+<p>Paste an email message below. The machine-learning model predicts whether it resembles spam or legitimate messages in its training data.</p>
+<form method="post"><label for="message">Email message</label>
+<textarea id="message" name="message" maxlength="10000" placeholder="Paste your email message here..." required>{{ message }}</textarea>
+<button type="submit">Check Email</button></form>
+{% if error %}<div class="result error" role="alert">{{ error }}</div>{% endif %}
+{% if prediction %}<div class="result" aria-live="polite"><strong>Prediction</strong>
+{% if prediction == "Spam" %}<h2 class="spam">⚠ Spam</h2><p>This message resembles spam examples in the training data.</p>
+{% else %}<h2 class="ham">✓ Not Spam</h2><p>This message resembles legitimate examples in the training data.</p>{% endif %}
+</div>{% endif %}
+<p class="note">Educational demo only. Predictions may be wrong. Do not rely on this result alone to decide whether an email or link is safe.</p>
+</main></body></html>
